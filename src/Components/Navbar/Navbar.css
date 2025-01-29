@@ -1,0 +1,68 @@
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px 120px; /* Marge extérieure */
+    padding: 0 20px; /* Ajout de padding pour éviter que le contenu ne touche les bords sur les petits écrans */
+    color: aliceblue;
+    background-color: #269fa860; /* Ajout d'une couleur de fond (exemple) */
+}
+
+.nav-logo {
+    font-family: 'Outfit', sans-serif; /* Ajout de 'sans-serif' en cas de problème avec la police */
+    font-size: 42px;
+    font-weight: 500;
+}
+
+.nav-menu {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    font-size: 18px;
+    gap: 19px;
+    padding: 0; /* Suppression du padding par défaut des listes */
+    margin: 0; /* Suppression des marges par défaut des listes */
+}
+
+.nav-menu li a { /* Style pour les liens */
+    text-decoration: none; /* Supprime le soulignement des liens */
+    color: aliceblue; /* Couleur du texte des liens */
+    transition: color 0.3s ease; /* Ajoute une transition pour la couleur au survol */
+}
+
+.nav-menu li a:hover { /* Style au survol des liens */
+    color: lightblue; /* Couleur au survol (exemple) */
+}
+
+.nav-contact {
+    border-radius: 50px;
+    padding: 10px 38px;
+    background-color: aqua;
+    color: black;
+    transition: background-color 0.3s ease, color 0.3s ease; /* Transitions pour le survol */
+}
+
+.nav-contact:hover {
+    background-color: #00bfff; /* Couleur de fond au survol (exemple) */
+    color: white; /* Couleur du texte au survol (exemple) */
+}
+
+/* Media query pour la responsivité */
+@media (max-width: 768px) { /* Exemple de point de rupture, à adapter */
+    .nav {
+        margin: 10px; /* Marges plus petites sur les petits écrans */
+        flex-direction: column; /* Menu en colonne */
+        align-items: flex-start; /* Alignement à gauche */
+        padding: 10px;
+    }
+
+    .nav-menu {
+        flex-direction: column; /* Menu en colonne */
+        gap: 10px; /* Espacement plus petit */
+        margin-top: 10px; /* Marge au-dessus du menu */
+    }
+
+    .nav-logo {
+        margin-bottom: 10px; /* Marge en dessous du logo */
+    }
+}
