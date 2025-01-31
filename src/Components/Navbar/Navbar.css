@@ -34,7 +34,7 @@
     color: lightblue; /* Couleur au survol (exemple) */
 }
 
-.nav-contact {
+.nav-register {
     border-radius: 50px;
     padding: 10px 38px;
     background-color: aqua;
@@ -42,10 +42,50 @@
     transition: background-color 0.3s ease, color 0.3s ease; /* Transitions pour le survol */
 }
 
-.nav-contact:hover {
+.nav-register:hover {
     background-color: #00bfff; /* Couleur de fond au survol (exemple) */
     color: white; /* Couleur du texte au survol (exemple) */
 }
+
+
+
+/* ... (styles précédents) */
+
+.modal {
+    position: fixed; /* Important: positionnement par rapport à la fenêtre */
+    top: 50%; /* Centre verticalement */
+    left: 50%; /* Centre horizontalement */
+    transform: translate(-50%, -50%); /* Ajustement pour centrer parfaitement */
+    width: auto; /* Largeur automatique */
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent pour l'arrière-plan */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Pour s'assurer que la modale est au-dessus des autres éléments */
+}
+
+.modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    position: relative;
+    min-width: 300px; /* Largeur minimale pour éviter que le contenu ne soit trop étroit */
+}
+
+.modal-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.error-message {
+    color: red;
+    margin-bottom: 10px;
+}
+
+/* ... (media queries) */
 
 /* Media query pour la responsivité */
 @media (max-width: 768px) { /* Exemple de point de rupture, à adapter */
