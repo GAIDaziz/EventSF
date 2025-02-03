@@ -1,0 +1,22 @@
+/* Explorer.css */
+.explorer-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+    background-color: rgba(237, 55, 5, 0.911);
+}
+
+.event-item {
+    width: 300px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.event-item img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* ... autres styles pour Explorer ... */

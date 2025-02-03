@@ -72,7 +72,9 @@ const Navbar = () => {
             <ul className='nav-menu'>
                 <li><a href="/">Accueil</a></li>
                 <li><a href="/explore">Explorer</a></li>
-                <li onClick={handleCreateEventClick} className='nav-create-event'><link to = "./Event">Créer un événement</link></li>
+                <li /* className='nav-create-event'*/>
+                    <Link to="/EventForm">Créer un événement</Link>
+                </li>
                 <li><a href="/about">À propos</a></li>
                 <li className='nav-register'>
                     <Link to="/register">Register</Link> 
@@ -106,3 +108,7 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+//<li onClick={handleCreateEventClick} className='nav-create-event'>
+//<a>Créer un événement</a>
+//</li>

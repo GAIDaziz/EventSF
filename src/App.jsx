@@ -1,9 +1,14 @@
-import React, { useState } from "react";
+import React, { useState , useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'; // Importez les composants de routage
 import Background from "./Components/Background/Background";
 import Navbar from "./Components/Navbar/Navbar";
 import Hero from "./Components/Hero/Hero";
 import Register from './Components/Register/Register'; // Importez le composant Register
+import EventForm from './Components/Event/EventForm'
+// useState et useEffect
+import axios from 'axios'; // Pour les requêtes HTTP
+import Explorer from "./Components/Explorer/Explorer";
+
 
 const App = () => {
     let heroData = [
@@ -13,27 +18,59 @@ const App = () => {
     ];
     const [heroCount, setHeroCount] = useState(0);
     const [playStatus, setPlayStatus] = useState(false);
+    const [showEventForm, setShowEventForm] = useState(false);
+    const [events, setEvents] = useState([]);
+
+    useEffect(() => {
+        const fetchEvents = async () => {
+            try {
+                const response = await axios.get('/api/events');
+                setEvents(response.data);
+            } catch (error) {
+                console.error("Erreur lors de la récupération des événements:", error);
+            }
+        };
+
+        fetchEvents();
+    }, []);
 
     const handleNextHero = () => {
         setHeroCount((prevCount) => (prevCount + 1) % heroData.length);
     };
 
+    const handleCloseEventForm = () => {
+        setShowEventForm(false);
+    };
+
+    const handleNewEvent = (newEvent) => {
+        setEvents([...events, newEvent]);
+        setShowEventForm(false); // Fermer le formulaire après la création
+    };
+
     return (
-        <Router> {/* Enveloppez l'application dans un Router */}
+        <Router>
             <div className="app-container">
                 <Background playStatus={playStatus} heroCount={heroCount} />
                 <Navbar />
-                <Routes> {/* Utilisez Routes pour définir les routes */}
-                    <Route path="/" element={<Hero 
+                <Routes>
+                    <Route path="/" element={<Hero
                         setPlayStatus={setPlayStatus}
                         heroData={heroData[heroCount % heroData.length]}
                         heroCount={heroCount}
                         setHeroCount={setHeroCount}
                         playStatus={playStatus}
                         onNextHero={handleNextHero}
-                    />} /> {/* Route pour la page d'accueil (Hero) */}
-                    <Route path="/register" element={<Register />} /> {/* Route pour Register */}
+                    />} />
+                    <Route path="/register" element={<Register />} />
+                    <Route path="/explore" element={<Explorer />} />
+                    <Route path="/EventForm" element={<EventForm />} />
                 </Routes>
+
+                
+
+                {showEventForm && <EventForm onClose={handleCloseEventForm} />} {/* <-- Passage de la fonction onClose */}
+
+                
             </div>
         </Router>
     );
