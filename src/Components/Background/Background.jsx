@@ -20,11 +20,12 @@ const Background = ({playStatus,heroCount}) => {
       }
        else if (heroCount===0)
         {
-            return <img src={img1} className='background' alt='' />
+            return <img src={img2} className='background' alt='' />
         }
         else if (heroCount===1)
             {
-                return <img src={img2} className='background' alt='' />
+                return <img src={img1} className='background' alt='' />
+               
             }  
         else if (heroCount===2)
             {

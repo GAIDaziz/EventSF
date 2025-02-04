@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import './EventForme.css'
 
-const EventForm = ({ onClose }) => { // <-- Déstructuration de la prop onClose
+const EventForm = ({ onClose }) => { 
   const [eventData, setEventData] = useState({
       title: '',
       description: '',
@@ -10,6 +10,7 @@ const EventForm = ({ onClose }) => { // <-- Déstructuration de la prop onClose
       location: '',
       image: null,
   });
+  
   
   const handleChange = (e) => {
     setEventData({ ...eventData, [e.target.name]: e.target.value });
@@ -55,7 +56,8 @@ const EventForm = ({ onClose }) => { // <-- Déstructuration de la prop onClose
   return (
     <div className="modal">
             <div className="modal-content">
-                <span className="modal-close" onClick={onClose}>&times;</span> {/* <-- Utilisation de onClose */}
+            <span className="modal-close" onClick={onClose}>&times;</span>
+ {/* <-- Utilisation de onClose */}
                 <form onSubmit={handleSubmit}>
                 <input type="text" name="title" placeholder="Titre" value={eventData.title} onChange={handleChange} required />
                 <textarea name="description" placeholder="Description" value={eventData.description} onChange={handleChange} required />
@@ -66,7 +68,7 @@ const EventForm = ({ onClose }) => { // <-- Déstructuration de la prop onClose
                 </form>
         </div>
     </div>         
-  );
+  ); 
 };
 
 export default EventForm;

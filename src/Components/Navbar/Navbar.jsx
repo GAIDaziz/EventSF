@@ -2,14 +2,12 @@ import './Navbar.css';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom'; 
 
-const Navbar = () => {
+const Navbar = ({ onOpenForm }) => {
     const [showModal, setShowModal] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem('token') ? true : false); // Vérifie si un token est déjà stocké
     const [errorMessage, setErrorMessage] = useState(null);
 
-    const handleCreateEventClick = () => {
-        console.log("Créer un événement cliqué !");
-    };
+    
 
     const handleLoginClick = () => {
         setShowModal(true);
@@ -72,8 +70,10 @@ const Navbar = () => {
             <ul className='nav-menu'>
                 <li><a href="/">Accueil</a></li>
                 <li><a href="/explore">Explorer</a></li>
-                <li /* className='nav-create-event'*/>
-                    <Link to="/EventForm">Créer un événement</Link>
+                <li >
+                    
+                <button onClick={onOpenForm}>Créer un événement</button>
+
                 </li>
                 <li><a href="/about">À propos</a></li>
                 <li className='nav-register'>

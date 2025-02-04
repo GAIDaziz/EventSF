@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import './Explorer.css'; // Importez le fichier CSS pour Explorer
+import './Explorer.css'; 
 import { Buffer } from 'buffer'; 
 
 

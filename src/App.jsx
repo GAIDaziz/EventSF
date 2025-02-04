@@ -41,6 +41,9 @@ const App = () => {
     const handleCloseEventForm = () => {
         setShowEventForm(false);
     };
+    const handleOpenEventForm = () => {
+        setShowEventForm(true); // <-- Ouvre le formulaire
+    };
 
     const handleNewEvent = (newEvent) => {
         setEvents([...events, newEvent]);
@@ -51,7 +54,8 @@ const App = () => {
         <Router>
             <div className="app-container">
                 <Background playStatus={playStatus} heroCount={heroCount} />
-                <Navbar />
+                <Navbar onOpenForm={handleOpenEventForm} /> 
+                
                 <Routes>
                     <Route path="/" element={<Hero
                         setPlayStatus={setPlayStatus}
@@ -63,7 +67,7 @@ const App = () => {
                     />} />
                     <Route path="/register" element={<Register />} />
                     <Route path="/explore" element={<Explorer />} />
-                    <Route path="/EventForm" element={<EventForm />} />
+                   
                 </Routes>
 
                 
