@@ -1,9 +1,9 @@
 import React, { useState , useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'; // Importez les composants de routage
 import Background from "./Components/Background/Background";
-import Navbar from "./Components/Navbar/Navbar";
+import Navbar from "./header/Navbar/Navbar";
 import Hero from "./Components/Hero/Hero";
-import Register from './Components/Register/Register'; // Importez le composant Register
+import Register from './header/Register/Register'; // Importez le composant Register
 import EventForm from './Components/Event/EventForm'
 // useState et useEffect
 import axios from 'axios'; // Pour les requêtes HTTP
