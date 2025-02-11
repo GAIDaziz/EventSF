@@ -6,7 +6,7 @@ import { Buffer } from 'buffer';
 
 const Explorer = () => {
     const [events, setEvents] = useState([]);
-
+    const [selectedEvent, setSelectedEvent] = useState(null); 
     useEffect(() => {
         const fetchEvents = async () => {
             try {
@@ -20,7 +20,6 @@ const Explorer = () => {
         fetchEvents();
     }, []);
     const getImageUrl = (imageData, contentType) => {
-        console.log(imageData+";"+contentType);
        // if (!imageData || !contentType) return null;
 
         const base64 = Buffer.from(imageData, 'binary').toString('base64'); // Utilisation de Buffer
@@ -30,13 +29,27 @@ const Explorer = () => {
         <div className="explorer-container"> {/* Utilisez une classe CSS spécifique */}
             {events.map((event) => (
                 <div key={event._id} className="event-item">
-                    <h3>{event.title}</h3>
-                    <p>{event.date}</p>
                     {event.img && ( // Vérifier si l'image existe
                         <img src={getImageUrl(event.img.data,null)} alt={event.title} />
                     )}
+                    <h3>{event.title}</h3>
+                    <p>date de l'événement:{event.date}</p>
+                    <button onClick={() => setSelectedEvent(event)}>Détails</button> {/* Bouton pour ouvrir la modale */}
                 </div>
             ))}
+            {selectedEvent && (
+                <div className="modal">
+                    <div className="modal-content">
+                        <span className="close" onClick={() => setSelectedEvent(null)}>&times;</span> {/* Bouton pour fermer la modale */}
+                        <h2>{selectedEvent.title}</h2>
+                        {selectedEvent.img && (
+                            <img src={getImageUrl(selectedEvent.img.data, selectedEvent.img.contentType)} alt={selectedEvent.title} />
+                        )}
+                        <p>Date: {selectedEvent.date}</p>
+                        <p>Description: {selectedEvent.description}</p> {/* Ajout d'une description si disponible */}
+                    </div>
+                </div>
+            )}
         </div>
     );
 };

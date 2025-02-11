@@ -1,28 +1,35 @@
+//Navebar.jsx
 import './Navbar.css';
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom'; 
+import React, { useState, useContext } from 'react';
+import { Link } from 'react-router-dom';
+import { AuthContext } from "../../context/AuthContext";
+import { toast } from 'react-toastify';
+
+
 
 const Navbar = ({ onOpenForm }) => {
     const [showModal, setShowModal] = useState(false);
-    const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem('token') ? true : false); // Vérifie si un token est déjà stocké
+    const { isLoggedIn, login, logout } = useContext(AuthContext);
+    if (isLoggedIn === undefined) {
+        console.error("AuthContext non chargé !");
+    }
+    console.log("Valeur de isLoggedIn dans Navbar:", isLoggedIn);
     const [errorMessage, setErrorMessage] = useState(null);
-
-    
-
+    console.log("Valeur de AuthContext dans Navbar:", useContext(AuthContext));
     const handleLoginClick = () => {
         setShowModal(true);
-        setErrorMessage(null); // Réinitialise le message d'erreur à l'ouverture de la modale
+        setErrorMessage(null);
     };
 
     const handleCloseModal = () => {
         setShowModal(false);
-        setErrorMessage(null); // Réinitialise le message d'erreur à la fermeture de la modale
+        setErrorMessage(null);
     };
 
     const handleFormSubmit = async (e) => {
         e.preventDefault();
         setErrorMessage(null);
-    
+
         try {
             const response = await fetch('/api/users/login', {
                 method: 'POST',
@@ -30,60 +37,54 @@ const Navbar = ({ onOpenForm }) => {
                 body: JSON.stringify({ email: e.target.email.value, password: e.target.password.value })
             });
     
+            const data = await response.json();
+            console.log("Réponse API Login :", data); // 👈 Vérifie si API envoie bien un token
+    
             if (!response.ok) {
-                const errorData = await response.text();
-                try {
-                    const jsonError = JSON.parse(errorData);
-                    setErrorMessage(jsonError.message || "Erreur lors de la connexion.");
-                } catch (parseError) {
-                    console.error("Erreur lors du parsing de l'erreur:", parseError);
-                    setErrorMessage(errorData || "Erreur lors de la connexion. Veuillez réessayer.");
-                }
+                setErrorMessage(data.message || "Erreur lors de la connexion.");
                 return;
             }
     
-            const data = await response.json();
-    
-            if (data.success) {
-                localStorage.setItem('token', data.data.token);
-                setIsLoggedIn(true);
+            if (data.token) {
+                console.log("Token reçu :", data.token);
+                login(data.token); // 👈 Enregistre le token
                 setShowModal(false);
-                alert("Connexion réussie !");
+                toast.success("Connexion réussie !");
             } else {
-                setErrorMessage(data.message);
+                setErrorMessage("Erreur lors de la connexion.");
             }
         } catch (error) {
             console.error("Erreur lors de la connexion:", error);
             setErrorMessage("Erreur lors de la connexion. Veuillez réessayer.");
         }
-    };
-
+    }
+    
     const handleLogout = () => {
-        localStorage.removeItem('token');
-        setIsLoggedIn(false);
-        alert("Déconnexion réussie !");
+        logout();
+        toast.info("Déconnexion réussie !");
     };
+    
+    
 
     return (
+        
         <div className='nav'>
             <div className='nav-logo'>EventS</div>
+            <nav>
+            <h1>{isLoggedIn ? "✅ Connecté" : "❌ Non connecté"}</h1>
+        </nav>
             <ul className='nav-menu'>
-                <li><a href="/">Accueil</a></li>
-                <li><a href="/explore">Explorer</a></li>
-                <li >
-                    
-                <button onClick={onOpenForm}>Créer un événement</button>
+                <li><Link to="/">Accueil</Link></li>
+                <li><Link to="/explore">Explorer</Link></li>
+                <li><button onClick={onOpenForm}>Créer un événement</button></li>
+                <li><Link to="/about">À propos</Link></li>
+                <li className='nav-register'><Link to="/register">Register</Link></li>
 
-                </li>
-                <li><a href="/about">À propos</a></li>
-                <li className='nav-register'>
-                    <Link to="/register">Register</Link> 
-                </li>
                 {!isLoggedIn ? (
                     <li className='nav-login' onClick={handleLoginClick}>Se connecter</li>
                 ) : (
                     <>
-                        <li>Bonjour !</li> {/* Ou afficher le nom d'utilisateur, etc. */}
+                        <li>Bonjour !</li>
                         <li className='nav-logout' onClick={handleLogout}>Se déconnecter</li>
                     </>
                 )}
@@ -94,7 +95,7 @@ const Navbar = ({ onOpenForm }) => {
                     <div className="modal-content">
                         <span className="modal-close" onClick={handleCloseModal}>&times;</span>
                         <h2>Connexion</h2>
-                        {errorMessage && <div className="error-message">{errorMessage}</div>} {/* Afficher l'erreur */}
+                        {errorMessage && <div className="error-message">{errorMessage}</div>}
                         <form onSubmit={handleFormSubmit}>
                             <input type="email" name="email" placeholder="Email" required />
                             <input type="password" name="password" placeholder="Mot de passe" required />
@@ -108,7 +109,3 @@ const Navbar = ({ onOpenForm }) => {
 };
 
 export default Navbar;
-
-//<li onClick={handleCreateEventClick} className='nav-create-event'>
-//<a>Créer un événement</a>
-//</li>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import './EventForme.css'
+import './EventForm.css';
 
 const EventForm = ({ onClose }) => { 
   const [eventData, setEventData] = useState({
@@ -10,8 +10,7 @@ const EventForm = ({ onClose }) => {
       location: '',
       image: null,
   });
-  
-  
+
   const handleChange = (e) => {
     setEventData({ ...eventData, [e.target.name]: e.target.value });
   };
@@ -23,16 +22,28 @@ const EventForm = ({ onClose }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // 🔥 Récupérer le token d'authentification
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      alert("Vous devez être connecté pour créer un événement !");
+      return;
+    }
+
     const formData = new FormData();
     for (const key in eventData) {
       formData.append(key, eventData[key]);
     }
 
     try {
-      const response = await axios.post('/api/events', formData);
+      const response = await axios.post('/api/events', formData, {
+        headers: {
+          Authorization: `Bearer ${token}`, // 🔥 Ajoute le token dans les headers
+          'Content-Type': 'multipart/form-data',
+        },
+      });
 
       if (response.status === 201) {
-        // Réinitialiser le formulaire ou afficher un message de succès
         setEventData({
           title: '',
           description: '',
@@ -40,33 +51,28 @@ const EventForm = ({ onClose }) => {
           location: '',
           image: null,
         });
-        alert('Événement créé avec succès !');
-      } else {
-        // Gérer les erreurs
-        console.error('Erreur lors de la création de l\'événement :', response.status);
-        const errorData = await response.data;
-        alert(`Erreur: ${errorData.message}`);
-      }
+        alert('🎉 Événement créé avec succès !');
+        onClose(); // Ferme la modale après création
+      } 
     } catch (error) {
-      console.error('Erreur lors de la requête :', error);
-      alert('Une erreur s\'est produite.');
+      console.error('❌ Erreur lors de la requête :', error);
+      alert(error.response?.data?.message || "Une erreur s'est produite.");
     }
   };
 
   return (
     <div className="modal">
-            <div className="modal-content">
-            <span className="modal-close" onClick={onClose}>&times;</span>
- {/* <-- Utilisation de onClose */}
-                <form onSubmit={handleSubmit}>
-                <input type="text" name="title" placeholder="Titre" value={eventData.title} onChange={handleChange} required />
-                <textarea name="description" placeholder="Description" value={eventData.description} onChange={handleChange} required />
-                <input type="date" name="date" value={eventData.date} onChange={handleChange} required />
-                <input type="text" name="location" placeholder="Lieu" value={eventData.location} onChange={handleChange} required />
-                <input type="file" name="image" onChange={handleImageChange} />
-                <button type="submit">Créer l'événement</button>
-                </form>
-        </div>
+      <div className="modal-content">
+        <span className="modal-close" onClick={onClose}>&times;</span>
+        <form onSubmit={handleSubmit}>
+          <input type="text" name="title" placeholder="Titre" value={eventData.title} onChange={handleChange} required />
+          <textarea name="description" placeholder="Description" value={eventData.description} onChange={handleChange} required />
+          <input type="date" name="date" value={eventData.date} onChange={handleChange} required />
+          <input type="text" name="location" placeholder="Lieu" value={eventData.location} onChange={handleChange} required />
+          <input type="file" name="image" onChange={handleImageChange} />
+          <button type="submit">Créer l'événement</button>
+        </form>
+      </div>
     </div>         
   ); 
 };
