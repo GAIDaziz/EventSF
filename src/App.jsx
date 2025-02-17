@@ -1,8 +1,7 @@
-//ap.jsx
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 import Background from "./Components/Background/Background";
 import Navbar from "./header/Navbar/Navbar";
 import Hero from "./Components/Hero/Hero";
@@ -10,7 +9,20 @@ import Register from "./header/Register/Register";
 import EventForm from "./Components/Event/EventForm";
 import axios from "axios";
 import Explorer from "./Components/Explorer/Explorer";
-import { AuthProvider } from "./context/AuthContext";  // 📌 Assure-toi que c'est bien importé
+import { AuthProvider, AuthContext } from "./context/AuthContext";  // 📌 Import AuthContext
+import AdminDashboard from "./pages/AdminDashboard";  
+
+const ProtectedAdminRoute = ({ children }) => {
+    const { isAdmin, mounted } = useContext(AuthContext);  // Access mounted state from context
+
+    // Ensure the component has mounted and check if the user is an admin
+    if (!mounted) {
+        return null;  // Optionally render a loading state if needed while mounted is false
+    }
+
+    // If the user is not an admin, navigate to '/'
+    return isAdmin() ? children : <Navigate to="/" />;
+};
 
 const App = () => {
     let heroData = [
@@ -56,7 +68,7 @@ const App = () => {
     };
 
     return (
-        
+        <AuthProvider>
             <Router>
                 <div className="app-container">
                     <Background playStatus={playStatus} heroCount={heroCount} />
@@ -78,14 +90,18 @@ const App = () => {
                                 />
                             } 
                         />
+                        
                         <Route path="/register" element={<Register />} />
                         <Route path="/explore" element={<Explorer />} />
+
+                        {/* 🔥 Route protégée pour admin */}
+                        <Route path="/admin" element={<ProtectedAdminRoute><AdminDashboard /></ProtectedAdminRoute>} />
                     </Routes>
 
                     {showEventForm && <EventForm onClose={handleCloseEventForm} />}
                 </div>
             </Router>
-        
+        </AuthProvider>
     );
 };
 

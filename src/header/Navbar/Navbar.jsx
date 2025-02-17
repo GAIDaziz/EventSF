@@ -70,21 +70,19 @@ const Navbar = ({ onOpenForm }) => {
         
         <div className='nav'>
             <div className='nav-logo'>EventS</div>
-            <nav>
-            <h1>{isLoggedIn ? "✅ Connecté" : "❌ Non connecté"}</h1>
-        </nav>
+            
             <ul className='nav-menu'>
-                <li><Link to="/">Accueil</Link></li>
-                <li><Link to="/explore">Explorer</Link></li>
+                <li className='Naveitem'><Link to="/">Accueil</Link></li>
+                <li className='Naveitem'><Link to="/explore">Explorer</Link></li>
                 <li><button onClick={onOpenForm}>Créer un événement</button></li>
-                <li><Link to="/about">À propos</Link></li>
+                
                 <li className='nav-register'><Link to="/register">Register</Link></li>
 
                 {!isLoggedIn ? (
                     <li className='nav-login' onClick={handleLoginClick}>Se connecter</li>
                 ) : (
                     <>
-                        <li>Bonjour !</li>
+                        <li>Bonjour {name} !</li>
                         <li className='nav-logout' onClick={handleLogout}>Se déconnecter</li>
                     </>
                 )}
