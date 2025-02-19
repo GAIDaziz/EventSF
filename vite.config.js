@@ -16,6 +16,10 @@ export default defineConfig({
         changeOrigin: true, // Nécessaire si ton backend est sur un domaine différent
         // rewrite: (path) => path.replace(/^\/api/, ''), // Optionnel : supprime /api du chemin de la requête
       },
+    '/api/admin': {
+      target: 'http://localhost:3005',
+      changeOrigin: true,
+    }  
     },
     
   },

@@ -62,14 +62,17 @@ const App = () => {
         setShowEventForm(true);
     };
 
-    const handleNewEvent = (newEvent) => {
+   /* const handleNewEvent = (newEvent) => {
         setEvents([...events, newEvent]);
         setShowEventForm(false);
-    };
+    };*/
 
     return (
         <AuthProvider>
+            
             <Router>
+                               
+               
                 <div className="app-container">
                     <Background playStatus={playStatus} heroCount={heroCount} />
                     <ToastContainer position="top-right" autoClose={3000} />
@@ -77,6 +80,7 @@ const App = () => {
                     <Navbar onOpenForm={handleOpenEventForm} />
 
                     <Routes>
+                   {/* < Route path="/admin" element={<ProtectedAdminRoute><AdminDashboard /></ProtectedAdminRoute>} />*/}
                         <Route 
                             path="/" 
                             element={
@@ -95,7 +99,10 @@ const App = () => {
                         <Route path="/explore" element={<Explorer />} />
 
                         {/* 🔥 Route protégée pour admin */}
+                        
                         <Route path="/admin" element={<ProtectedAdminRoute><AdminDashboard /></ProtectedAdminRoute>} />
+                
+                       
                     </Routes>
 
                     {showEventForm && <EventForm onClose={handleCloseEventForm} />}
