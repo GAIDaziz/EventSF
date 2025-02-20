@@ -1,6 +1,6 @@
 /* Style général du tableau de bord */
 .admin-dashboard-container {
-  background-color: black; /* Fond noir */
+  background-color: rgb(12, 12, 12); /* Fond noir */
   color: white; /* Texte blanc */
   position: fixed; /* Pour couvrir toute la page */
   top: 0;
@@ -37,8 +37,8 @@ ul {
 li {
   margin-bottom: 10px;
   padding: 10px;
-  border: 1px solid #ccc; /* Bordure légère */
-  background-color: #333; /* Fond légèrement plus clair pour les éléments de la liste */
+ /* border: 1px solid #ccc; /* Bordure légère */
+  background-color: #33333300; /* Fond légèrement plus clair pour les éléments de la liste */
 }
 
 button {

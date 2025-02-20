@@ -9,7 +9,7 @@ import { toast } from 'react-toastify';
 
 const Navbar = ({ onOpenForm }) => {
     const [showModal, setShowModal] = useState(false);
-    const { isLoggedIn, login, logout } = useContext(AuthContext);
+    const { isLoggedIn, login, logout ,user  } = useContext(AuthContext);
     if (isLoggedIn === undefined) {
         console.error("AuthContext non chargé !");
     }
@@ -82,7 +82,7 @@ const Navbar = ({ onOpenForm }) => {
                     <li className='nav-login' onClick={handleLoginClick}>Se connecter</li>
                 ) : (
                     <>
-                        <li>Bonjour {name} !</li>
+                        <li>Bonjour {user ? user.name : "Utilisateur"}</li>
                         <li className='nav-logout' onClick={handleLogout}>Se déconnecter</li>
                     </>
                 )}

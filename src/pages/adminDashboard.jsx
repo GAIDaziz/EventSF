@@ -6,7 +6,10 @@ import './adminDashboard.css';
 import { toast } from 'react-toastify';
 
 const AdminDashboard = () => {
-    const { userRole, isLoggedIn, isAdmin } = useContext(AuthContext);
+    const { isAdmin } = useContext(AuthContext);
+    const [editingUser, setEditingUser] = useState(null); // Utilisateur en cours de modification
+    const [editedUserData, setEditedUserData] = useState({}); // Données modifiées de l'utilisateur
+
 
     if (!isAdmin()) {
         console.log("Accès refusé: l'utilisateur n'est pas administrateur.");
@@ -67,28 +70,39 @@ const AdminDashboard = () => {
 });
 };
 
-    const updateUser = async (userId, updatedData) => {
-        Swal.fire({
-            title: 'Êtes-vous sûr de vouloir modifier cet utilisateur ?',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#d33',
-            cancelButtonColor: '#3085d6',
-            confirmButtonText: 'Oui, modifier!',
-            cancelButtonText: 'Non, annuler'
-        }).then(async (result) => {
-            if (result.isConfirmed) {
+const updateUser = async (user) => {
+    setEditingUser(user); // Définir l'utilisateur en cours de modification
+    setEditedUserData({ ...user }); // Pré-remplir le formulaire avec les données actuelles
+};
 
-        try {
-            const response = await axios.put(`http://localhost:3005/api/admin/updateUser/${userId}`, updatedData, authHeader);
-            setUsers(users.map(user => user.id === userId ? response.data.user : user));
-            toast.success("Utilisateur mis à jour avec succès");
-        } catch (error) {
-            console.error("Erreur lors de la mise à jour de l'utilisateur", error);
-            toast.error("Erreur lors de la mise à jour");
+const handleInputChange = (e) => {
+    setEditedUserData({ ...editedUserData, [e.target.name]: e.target.value });
+};
+
+const saveUser = async (userId) => {
+    Swal.fire({
+        title: 'Êtes-vous sûr de vouloir modifier cet utilisateur ?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Oui, modifier!',
+        cancelButtonText: 'Non, annuler'
+    }).then(async (result) => {
+        if (result.isConfirmed) {
+            try {
+            
+                const response = await axios.put(`http://localhost:3005/api/admin/updateUser/${userId}`, editedUserData, authHeader);
+                    console.log("envoie a l'api");
+                setUsers(users.map(user => user.id === userId ? response.data.user : user));
+                toast.success("Utilisateur mis à jour avec succès");
+                setEditingUser(null); // Fermer le formulaire de modification
+            } catch (error) {
+                console.error("Erreur lors de la mise à jour de l'utilisateur", error);
+                toast.error("Erreur lors de la mise à jour");
+            }
         }
-    }
-});
+    });
 };
 
     return (
@@ -106,14 +120,26 @@ const AdminDashboard = () => {
 
                         <h2>Liste des utilisateurs</h2>
                         <ul>
-                            {users.map((user) => (
-                                <li key={user.id}>
-                                    {user.name} - {user.email} ({user.role})
-                                    <button onClick={() => deleteUser(user.id)}>Supprimer</button>
-                                    <button onClick={() => updateUser(user.id, { role: "updatedRole" })}>Modifier</button>
-                                </li>
-                            ))}
-                        </ul>
+                {users.map((user) => (
+                    <li key={user.id}>
+                        {user.name} - {user.email} ({user.role})
+                        <button onClick={() => deleteUser(user.id)}>Supprimer</button>
+                        <button onClick={() => updateUser(user)}>Modifier</button>
+                        {editingUser === user && ( // Afficher le formulaire si l'utilisateur est en cours de modification
+                            <form>
+                                <input type="text" name="name" value={editedUserData.name} onChange={handleInputChange} placeholder="Nom" />
+                                <input type="email" name="email" value={editedUserData.email} onChange={handleInputChange} placeholder="Email" />
+                                <select name="role" value={editedUserData.role} onChange={handleInputChange}>
+                                    <option value="user">Utilisateur</option>
+                                    <option value="admin">Administrateur</option>
+                                </select>
+                                <button type="button" onClick={() => saveUser(user.id)}>Enregistrer</button>
+                                <button type="button" onClick={() => setEditingUser(null)}>Annuler</button>
+                            </form>
+                        )}
+                    </li>
+                ))}
+            </ul>
                     </>
                 )}
             </div>
