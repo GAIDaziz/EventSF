@@ -1,6 +1,7 @@
 /* Style général du tableau de bord */
+/* AWW */
 .admin-dashboard-container {
-  background-color: rgb(12, 12, 12); /* Fond noir */
+  background-color: rgba(24, 23, 23, 0.918); /* Fond noir */
   color: white; /* Texte blanc */
   position: fixed; /* Pour couvrir toute la page */
   top: 0;
@@ -17,12 +18,12 @@
   margin: 0 auto; /* Centrer le contenu */
 }
 
-h1 {
+.h1-dashbord {
   font-size: 2em;
   margin-bottom: 10px;
 }
 
-h2 {
+.h2-dashbord {
   font-size: 1.5em;
   margin-top: 20px;
   margin-bottom: 10px;
@@ -30,7 +31,7 @@ h2 {
 
 /* Style de la liste des utilisateurs */
 ul {
-  list-style: none;
+  list-style:circle;
   padding: 0;
 }
 
@@ -48,4 +49,52 @@ button {
   color: rgb(254, 252, 252);
   border: none;
   cursor: pointer;
+}
+
+/* Version tablette */
+@media screen and (max-width: 1024px) {
+  .admin-dashboard-content {
+    max-width: 90%;
+  }
+
+  .h1-dashbord  {
+    font-size: 1.8em;
+  }
+
+  .h2-dashbord {
+    font-size: 1.4em;
+  }
+
+  button {
+    padding: 8px 12px;
+  }
+}
+
+/* Version mobile */
+@media screen and (max-width: 768px) {
+  .admin-dashboard-container {
+    padding: 10px;
+  }
+
+  .admin-dashboard-content {
+    max-width: 100%;
+  }
+
+  .h1-dashbord  {
+    font-size: 1.5em;
+  }
+
+  .h2-dashbord {
+    font-size: 1.2em;
+  }
+
+  li {
+    padding: 8px;
+  }
+
+  button {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+  }
 }

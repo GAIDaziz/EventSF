@@ -10,7 +10,7 @@ import EventForm from "./Components/Event/EventForm";
 import axios from "axios";
 import Explorer from "./Components/Explorer/Explorer";
 import { AuthProvider, AuthContext } from "./context/AuthContext";  // 📌 Import AuthContext
-import AdminDashboard from "./pages/AdminDashboard";  
+import AdminDashboard from "./pages/adminDashboard";  
 
 const ProtectedAdminRoute = ({ children }) => {
     const { isAdmin, mounted } = useContext(AuthContext);  // Access mounted state from context

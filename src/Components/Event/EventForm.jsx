@@ -29,18 +29,16 @@ const EventForm = ({ onClose }) => {
       alert("Vous devez être connecté pour créer un événement !");
       return;
     }
-
+console.log(eventData+";"+token);
     const formData = new FormData();
     for (const key in eventData) {
       formData.append(key, eventData[key]);
     }
-
     try {
       const response = await axios.post('/api/events', formData, {
         headers: {
           Authorization: `Bearer ${token}`, // 🔥 Ajoute le token dans les headers
-          'Content-Type': 'multipart/form-data',
-        },
+        }
       });
 
       if (response.status === 201) {

@@ -33,7 +33,7 @@ const Explorer = () => {
                         <img src={getImageUrl(event.img.data,null)} alt={event.title} />
                     )}
                     <h3>{event.title}</h3>
-                    <p>date de l'événement:{event.date}</p>
+                    <p>date de l'événement: {event.date.slice(0, 10)}</p>
                     <button onClick={() => setSelectedEvent(event)}>Détails</button> {/* Bouton pour ouvrir la modale */}
                 </div>
             ))}

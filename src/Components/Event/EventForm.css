@@ -28,7 +28,7 @@
 }
 .modal-close {
     color: #ff9800; /* Couleur du bouton de fermeture festive */
-    position: absolute;
+  position: absolute;
     top: 15px;
     right: 15px;
     font-size: 30px;
@@ -61,7 +61,7 @@
     background-color: #ff9800; /* Couleur du bouton festive */
     color: white;
     padding: 12px 20px;
-    border: none;
+   border: none;
     border-radius: 5px;
     cursor: pointer;
     font-weight: bold;

@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
 import axios from "axios";
 import Swal from 'sweetalert2'; // Import SweetAlert2 qui est une librairir etuliser pour des  alerte et eviter des action pare accident  
-import './adminDashboard.css';
+import './adminDashboard.module.css';
 import { toast } from 'react-toastify';
 
 const AdminDashboard = () => {
@@ -108,17 +108,17 @@ const saveUser = async (userId) => {
     return (
         <div className="admin-dashboard-container">
             <div className="admin-dashboard-content">
-                <h1>Tableau de bord Admin</h1>
-                <p>Bienvenue, administrateur !</p>
+                <h1 className="h1-dashbord">Tableau de bord Admin</h1>
+                <p className="p-dashbord">Bienvenue, administrateur !</p>
                 {loading ? (
                     <p>Chargement...</p>
                 ) : (
                     <>
-                        <h2>Statistiques</h2>
-                        <p>Total Utilisateurs: {stats.totalUsers}</p>
-                        <p>Total Événements: {stats.totalEvents}</p>
+                        <h2 className="h2-dashbord">Statistiques</h2>
+                        <p className="p-dashbord">Total Utilisateurs: {stats.totalUsers}</p>
+                        <p className="-dashbord">Total Événements: {stats.totalEvents}</p>
 
-                        <h2>Liste des utilisateurs</h2>
+                        <h2 className="h2-dashbord">Liste des utilisateurs</h2>
                         <ul>
                 {users.map((user) => (
                     <li key={user.id}>
