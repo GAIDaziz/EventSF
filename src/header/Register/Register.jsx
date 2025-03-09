@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { useNavigate } from "react-router-dom";
+
 import './Register.css';
 
 const Register = () => {
@@ -7,6 +9,7 @@ const Register = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -72,7 +75,10 @@ const Register = () => {
             required
           />
         </div>
+        <button type="button" style={{marginRight:'5px'}}  onClick={() => navigate("/")}>Quitter</button>
+
         <button type="submit">S'inscrire</button>
+
       </form>
     </div>
   );

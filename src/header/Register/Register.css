@@ -1,11 +1,16 @@
 .register {
     font-family: sans-serif;
-    background-color: #f8f8f8; /* Couleur de fond claire */
+    background-color: #ffffff; /* Couleur de fond claire */
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
+    min-width: 100vw;
     margin: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
   }
   
   .register-container {
@@ -18,14 +23,14 @@
   
   h2 {
     text-align: center;
-    color: #ff6f00; /* Couleur festive pour le titre */
+    color: #FF3131; /* Couleur festive pour le titre */
     margin-bottom: 30px;
   }
   
   label {
     display: block;
     margin-bottom: 8px;
-    color: #333;
+    color: #000000;
   }
   
   input[type="text"],
@@ -40,17 +45,17 @@
   }
   
   button {
-    background-color: #ff6f00; /* Couleur festive pour le bouton */
+    background-color: #FF3131 ; /* Couleur festive pour le bouton */
     color: white;
-    padding: 12px 20px;
     border: none;
-    border-radius: 4px;
+    border-radius: 20px;
     cursor: pointer;
-    width: 100%;
+    padding: 7.5px 30px;
+
   }
   
   button:hover {
-    background-color: #e65100; /* Couleur légèrement plus foncée au survol */
+    background-color:#FF3131  ; /* Couleur légèrement plus foncée au survol */
   }
   
   .error {

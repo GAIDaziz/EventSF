@@ -5,14 +5,41 @@
     margin: 20px 120px; /* Marge extérieure */
     padding: 0 20px; /* Ajout de padding pour éviter que le contenu ne touche les bords sur les petits écrans */
     color: aliceblue;
-    background-color: #269fa860; /* Ajout d'une couleur de fond (exemple) */
+    background-color: #00000070; /* Ajout d'une couleur de fond (exemple) */
+    border-radius: 20px;
 }
 
 .nav-logo {
-    font-family: 'Outfit', sans-serif; /* Ajout de 'sans-serif' en cas de problème avec la police */
+    font-family: "Ms Madi", serif;    font-weight: 900;
     font-size: 42px;
+    font-weight: bolder;
     font-weight: 500;
 }
+.nav-login{
+    background-color: #FF3131 ; /* Couleur festive pour le bouton */
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    padding: 7.5px 30px;
+}
+.nav-login:hover{
+    background-color: #8F00FF ; /* Couleur festive pour le bouton */
+
+}
+ .createEvent{
+    background-color: #FF3131 ; /* Couleur festive pour le bouton */
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    padding: 7.5px 30px;
+
+ }
+ .createEvent:hover{
+    background-color: #8F00FF ; /* Couleur festive pour le bouton */
+
+ }
 
 .nav-menu {
     display: flex;
@@ -44,14 +71,20 @@
 
 .nav-register {
     border-radius: 50px;
-    padding: 10px 38px;
-    background-color: aqua;
-    color: black;
+    padding: 7.5px 30px;
+    background-color: #8F00FF  ;
+    color: rgb(255, 255, 255);
     transition: background-color 0.3s ease, color 0.3s ease; /* Transitions pour le survol */
 }
-
+.nav-logout{
+    border-radius: 50px;
+    padding: 7.5px 30px;
+    background-color: #8F00FF  ;
+    color: rgb(255, 255, 255);
+    transition: background-color 0.3s ease, color 0.3s ease; /* Transitions pour le survol */
+}
 .nav-register:hover {
-    background-color: #00bfff; /* Couleur de fond au survol (exemple) */
+    background-color:#8F00FF ; /* Couleur de fond au survol (exemple) */
     color: white; /* Couleur du texte au survol (exemple) */
 }
 
@@ -86,6 +119,7 @@
     right: 10px;
     font-size: 20px;
     cursor: pointer;
+    color: #FF3131;
 }
 
 .error-message {

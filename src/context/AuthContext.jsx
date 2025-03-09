@@ -7,6 +7,8 @@ export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
     const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("token"));
     const [userRole, setUserRole] = useState(null);
+    const [username, setUser] = useState();
+
     const [mounted, setMounted] = useState(false);
     useEffect(() => {
         const checkLoginStatus = () => {
@@ -14,9 +16,9 @@ export const AuthProvider = ({ children }) => {
             if (token) {
                 try {
                     const decoded = jwt_decode(token);  // Utilisation correcte de jwt_decode
-                    console.log(decoded.role);
+                    console.log(decoded.username);
                     setUserRole(decoded.role || "user");
-                    
+                    setUser(decoded.username);
                     setIsLoggedIn(true);
                 } catch (error) {
                     console.error("Erreur lors du décodage du token:", error);
@@ -26,6 +28,8 @@ export const AuthProvider = ({ children }) => {
             } else {
                 setIsLoggedIn(false);
                 setUserRole(null);
+                setUser(null);
+
             }
         };
 
@@ -44,9 +48,13 @@ export const AuthProvider = ({ children }) => {
         try {
             const decoded = jwt_decode(token);  // Utilisation correcte de jwt_decode
             setUserRole(decoded.role || "user");
+            setUser(decoded.username);
+
         } catch (error) {
             console.error("Erreur lors du décodage du token:", error);
             setUserRole(null);
+            setUser(null);
+
         }
         setMounted(true);
         window.dispatchEvent(new Event("storage"));
@@ -62,7 +70,7 @@ export const AuthProvider = ({ children }) => {
     const isAdmin = () => userRole === "admin";  // Vérifie si l'utilisateur est admin
 
     return (
-        <AuthContext.Provider value={{ isLoggedIn, userRole, login, logout, isAdmin,mounted }}>
+        <AuthContext.Provider value={{ isLoggedIn, userRole, login, logout, isAdmin,mounted,username }}>
             {children}
         </AuthContext.Provider>
     );

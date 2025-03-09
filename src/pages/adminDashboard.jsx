@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
 import axios from "axios";
 import Swal from 'sweetalert2'; // Import SweetAlert2 qui est une librairir etuliser pour des  alerte et eviter des action pare accident  
-import './adminDashboard.module.css';
+import './adminDashboard.css';
 import { toast } from 'react-toastify';
 
 const AdminDashboard = () => {
@@ -123,8 +123,10 @@ const saveUser = async (userId) => {
                 {users.map((user) => (
                     <li key={user.id}>
                         {user.name} - {user.email} ({user.role})
-                        <button onClick={() => deleteUser(user.id)}>Supprimer</button>
-                        <button onClick={() => updateUser(user)}>Modifier</button>
+                        <div style={{marginTop:'10px',marginBottom:'10px'}}></div>
+
+                        <button style={{marginLeft:'20px'}} onClick={() => deleteUser(user.id)}>Supprimer</button>
+                        <button  style={{marginLeft:'20px'}} onClick={() => updateUser(user)}>Modifier</button>
                         {editingUser === user && ( // Afficher le formulaire si l'utilisateur est en cours de modification
                             <form>
                                 <input type="text" name="name" value={editedUserData.name} onChange={handleInputChange} placeholder="Nom" />
@@ -133,8 +135,8 @@ const saveUser = async (userId) => {
                                     <option value="user">Utilisateur</option>
                                     <option value="admin">Administrateur</option>
                                 </select>
-                                <button type="button" onClick={() => saveUser(user.id)}>Enregistrer</button>
-                                <button type="button" onClick={() => setEditingUser(null)}>Annuler</button>
+                                <button type="button" className="buttonad" onClick={() => saveUser(user.id)}>Enregistrer</button>
+                                <button type="button" className="buttonad" onClick={() => setEditingUser(null)}>Annuler</button>
                             </form>
                         )}
                     </li>

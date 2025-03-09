@@ -9,7 +9,7 @@ import { toast } from 'react-toastify';
 
 const Navbar = ({ onOpenForm }) => {
     const [showModal, setShowModal] = useState(false);
-    const { isLoggedIn, login, logout ,user  } = useContext(AuthContext);
+    const { isLoggedIn, login, logout ,username  } = useContext(AuthContext);
     if (isLoggedIn === undefined) {
         console.error("AuthContext non chargé !");
     }
@@ -69,23 +69,25 @@ const Navbar = ({ onOpenForm }) => {
     return (
         
         <div className='nav'>
-            <div className='nav-logo'>EventS</div>
+            <div className='nav-logo'>Eventura</div>
             
             <ul className='nav-menu'>
                 <li className='Naveitem'><Link to="/">Accueil</Link></li>
                 <li className='Naveitem'><Link to="/explore">Explorer</Link></li>
-                <li><button onClick={onOpenForm}>Créer un événement</button></li>
-                
-                <li className='nav-register'><Link to="/register">Register</Link></li>
-
                 {!isLoggedIn ? (
-                    <li className='nav-login' onClick={handleLoginClick}>Se connecter</li>
+                    <button className='nav-login' onClick={handleLoginClick}>Se connecter</button>
                 ) : (
                     <>
-                        <li>Bonjour {user ? user.name : "Utilisateur"}</li>
-                        <li className='nav-logout' onClick={handleLogout}>Se déconnecter</li>
+                        <li>Bonjour, {username || "anonyme"}</li>
+                        {isLoggedIn&&<li><button className='createEvent' onClick={onOpenForm}>Créer un événement</button></li>}
+
+                        <button className='nav-logout' onClick={handleLogout}>Se déconnecter</button>
                     </>
                 )}
+                
+                {!isLoggedIn&&<button className='nav-register'><Link style={{ color: "white",textDecoration:"none" }}to="/register">Register</Link></button>}
+
+               
             </ul>
 
             {showModal && (

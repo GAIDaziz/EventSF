@@ -33,8 +33,8 @@ const Explorer = () => {
                         <img src={getImageUrl(event.img.data,null)} alt={event.title} />
                     )}
                     <h3>{event.title}</h3>
-                    <p>date de l'événement: {event.date.slice(0, 10)}</p>
-                    <button onClick={() => setSelectedEvent(event)}>Détails</button> {/* Bouton pour ouvrir la modale */}
+                    <p  style={{marginTop:"10px",marginBottom:"10px"}}>date de l'événement: {event.date.slice(0, 10)}</p>
+                    <button onClick={() => setSelectedEvent(event)} style={{marginTop:"60px"}}>Détails</button> {/* Bouton pour ouvrir la modale */}
                 </div>
             ))}
             {selectedEvent && (
@@ -45,7 +45,7 @@ const Explorer = () => {
                         {selectedEvent.img && (
                             <img src={getImageUrl(selectedEvent.img.data, selectedEvent.img.contentType)} alt={selectedEvent.title} />
                         )}
-                        <p>Date: {selectedEvent.date}</p>
+                        <p>Date: {selectedEvent.date.slice(0, 10)}</p>
                         <p>Description: {selectedEvent.description}</p> {/* Ajout d'une description si disponible */}
                     </div>
                 </div>

@@ -4,7 +4,6 @@
     flex-wrap: wrap;
     gap: 20px;
     padding: 20px;
-    background-color: rgba(9, 170, 215, 0.178);
     justify-content: center; /* Centrer les éléments */
 }
 
@@ -17,7 +16,7 @@
     border: 1px solid #01010000;
     padding: 10px;
     box-sizing: border-box;
-    background-color: antiquewhite;
+    background-color: rgb(255, 255, 255);
     border-radius: 10px;
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease-in-out;
@@ -39,9 +38,8 @@
 
 /* Titre */
 .event-item h3 {
-    color: rgb(255, 0, 0);
-    background-color: rgba(248, 236, 4, 0.374);
-    padding: 5px;
+    color: rgb(255, 255, 255);
+    background-color:#FF3131;
     text-align: center;
     border-radius: 5px;
     width: 100%;
