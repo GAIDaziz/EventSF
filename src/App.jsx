@@ -3,14 +3,16 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 import Background from "./Components/Background/Background";
-import Navbar from "./header/Navbar/Navbar";
+import Navbar from "./Components/header/Navbar/Navbar";
 import Hero from "./Components/Hero/Hero";
-import Register from "./header/Register/Register";
+import Register from "./Components/header/Register/Register";
 import EventForm from "./Components/Event/EventForm";
 import axios from "axios";
 import Explorer from "./Components/Explorer/Explorer";
-import { AuthProvider, AuthContext } from "./context/AuthContext";  // 📌 Import AuthContext
-import AdminDashboard from "./pages/adminDashboard";  
+import { AuthProvider, AuthContext } from "./context/AuthContext"; 
+import AdminDashboard from "./admin/adminDashboard";  
+import Footer from "./Components/footer/footer";
+
 
 const ProtectedAdminRoute = ({ children }) => {
     const { isAdmin, mounted } = useContext(AuthContext);  // Access mounted state from context
@@ -62,10 +64,7 @@ const App = () => {
         setShowEventForm(true);
     };
 
-   /* const handleNewEvent = (newEvent) => {
-        setEvents([...events, newEvent]);
-        setShowEventForm(false);
-    };*/
+  
 
     return (
         <AuthProvider>
@@ -80,7 +79,7 @@ const App = () => {
                     <Navbar onOpenForm={handleOpenEventForm} />
 
                     <Routes>
-                   {/* < Route path="/admin" element={<ProtectedAdminRoute><AdminDashboard /></ProtectedAdminRoute>} />*/}
+                
                         <Route 
                             path="/" 
                             element={
@@ -106,6 +105,8 @@ const App = () => {
                     </Routes>
 
                     {showEventForm && <EventForm onClose={handleCloseEventForm} />}
+
+                    <Footer/>
                 </div>
             </Router>
         </AuthProvider>

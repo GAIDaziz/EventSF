@@ -11,7 +11,7 @@ const Hero = ({ heroData, setHeroCount, heroCount, playStatus, setPlayStatus, on
                 <p>{heroData.text2}</p>
             </div>
             <div className='hero-explore'>
-                <p>event of the weak</p>
+                <p>Scroll</p>
                 <img src={fleche} alt="" style={{ width: '40px', height: '50px' }} onClick={onNextHero} /> {/* Ajout du onClick */}
             </div>
             <div className='hero-dot-play'>

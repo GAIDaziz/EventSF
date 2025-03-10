@@ -10,4 +10,11 @@
     position: fixed;
     object-fit: cover;
     z-index: -1;
+    background-position: center;
 }
+
+@media (max-width: 360px) {
+    .background {
+    background-position: center;
+    }
+    }
