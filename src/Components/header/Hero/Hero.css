@@ -14,7 +14,7 @@
 .hero-explore{
     display: flex;
     align-items: center;
-    gap: 50px;
+    gap: 20px;
     width:fit-content;
     margin-top: 70px;
     padding: 5px 8px;
@@ -29,7 +29,7 @@
     font-weight: 500;
 }
 .hero-dot-play{
-    margin-top: 120px;
+    margin-top: 50px;
     display: flex;
     justify-content: space-between;
 }
@@ -58,4 +58,30 @@
 .hero-play p{
     color: aliceblue;
     font-size: 23px;
+}
+
+
+/*respensive DEsigne*/
+
+@media (min-width: 400px) {
+    .hero {
+        margin: 0px 20px;
+        margin-top: 100px;
+    }
+    .hero-text{
+        font-size: 40px;
+        line-height: 60px;
+        text-align: center;
+    }
+    .hero-explore{
+        gap: 15px;
+        padding: 8px 15px;
+        border-radius: 30px;
+    }
+    .hero-explore p {
+        font-size: 16px;
+    }
+    .hero-play p {
+        font-size: 16px;
+    }
 }

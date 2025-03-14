@@ -59,3 +59,21 @@
     color: aliceblue;
     font-size: 23px;
 }
+
+@media (max-width : 425px) {
+    .hero-text{
+        color: aliceblue;
+        font-size: 20px;
+        font-weight: 500;
+        line-height: 130px;
+    }
+}
+
+@media (max-width : 768px) {
+    .hero-text{
+        color: aliceblue;
+        font-size: 32px;
+        font-weight: 500;
+        line-height: 130px;
+    }
+}

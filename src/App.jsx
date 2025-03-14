@@ -106,9 +106,10 @@ const App = () => {
 
                     {showEventForm && <EventForm onClose={handleCloseEventForm} />}
 
-                    <Footer/>
+                    
                 </div>
             </Router>
+            <Footer/>
         </AuthProvider>
     );
 };
