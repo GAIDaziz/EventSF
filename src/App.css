@@ -1,6 +1,100 @@
-flesche{
-    width: 30px;
-    height: 10px;
-
+*{
+  margin: 0;
+  padding: 0;
+  
+  
+}
+/* Arrière-plan animé pour les pages autres que home */
+.animated-event-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: -1;
+    pointer-events: none;
+    background: linear-gradient(
+        135deg,
+        #667eea 0%,
+        #764ba2 25%,
+        #f093fb 50%,
+        #f5576c 75%,
+        #4facfe 100%
+    );
+    background-size: 300% 300%;
+    animation: gradientShift 8s ease infinite;
 }
 
+/* Animation du dégradé */
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Particules flottantes (confettis) */
+.animated-event-background::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.1) 2px, transparent 2px),
+        radial-gradient(circle at 80% 50%, rgba(255, 215, 0, 0.15) 1px, transparent 1px),
+        radial-gradient(circle at 40% 20%, rgba(255, 105, 180, 0.1) 1.5px, transparent 1.5px),
+        radial-gradient(circle at 60% 80%, rgba(138, 43, 226, 0.12) 2px, transparent 2px),
+        radial-gradient(circle at 90% 30%, rgba(255, 165, 0, 0.1) 1px, transparent 1px),
+        radial-gradient(circle at 10% 70%, rgba(30, 144, 255, 0.12) 1.5px, transparent 1.5px);
+    background-size: 
+        200px 200px,
+        150px 150px,
+        300px 300px,
+        250px 250px,
+        180px 180px,
+        220px 220px;
+    animation: floatingParticles 15s linear infinite;
+}
+
+/* Animation des particules */
+@keyframes floatingParticles {
+    0% {
+        transform: translateY(0) rotate(0deg);
+    }
+    100% {
+        transform: translateY(-20px) rotate(360deg);
+    }
+}
+
+/* Effet de pulsation subtile */
+.animated-event-background::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 600px;
+    height: 600px;
+    margin-left: -300px;
+    margin-top: -300px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: subtlePulse 4s ease-in-out infinite;
+}
+
+@keyframes subtlePulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 0.3;
+    }
+    50% {
+        transform: scale(1.1);
+        opacity: 0.1;
+    }
+}

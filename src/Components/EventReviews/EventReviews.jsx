@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import './EventReviews.css';
 
 function EventReviews({ eventId, userId }) { // Ajout de userId en props
   const [reviews, setReviews] = useState([]);
@@ -33,12 +34,18 @@ function EventReviews({ eventId, userId }) { // Ajout de userId en props
   };
 
   return (
-    <div>
+    <div className="event-reviews">
       <h3>Avis</h3>
       <ul>
         {reviews.map(review => (
           <li key={review.id}>
-            Note: {review.rating}, Commentaire: {review.comment}
+          <div className="stars">
+        {'★'.repeat(review.rating)}{'☆'.repeat(5 - review.rating)}
+      </div>
+      <div>
+        {review.comment}
+        <span className="emoji">🎉😊</span>
+      </div>
           </li>
         ))}
       </ul>

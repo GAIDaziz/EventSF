@@ -1,37 +1,78 @@
-import './Hero.css';
-import fleche from '../../assets/fleche.png';
-import play from '../../assets/play.png';
-import pause from '../../assets/pause.png';
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import "./Hero.css"; // 🎨 CSS mis à jour
 
-const Hero = ({ heroData, setHeroCount, heroCount, playStatus, setPlayStatus, onNextHero }) => { // Ajout de setPlayStatus et onNextHero
-    return (
-        <div className='hero'>
-            <div className='hero-text'>
-                <p>{heroData.text1}</p>
-                <p>{heroData.text2}</p>
-            </div>
-            <div className='hero-explore'>
-                <p>Scroll</p>
-                <img src={fleche} alt="" style={{ width: '40px', height: '50px' }} onClick={onNextHero} /> {/* Ajout du onClick */}
-            </div>
-            <div className='hero-dot-play'>
-                <ul className='hero-dots'>
-                    <li onClick={() => setHeroCount(0)} className={heroCount === 0 ? "hero-dot orange" : "hero-dot"}></li>
-                    <li onClick={() => setHeroCount(1)} className={heroCount === 1 ? "hero-dot orange" : "hero-dot"}></li>
-                    <li onClick={() => setHeroCount(2)} className={heroCount === 2 ? "hero-dot orange" : "hero-dot"}></li>
-                </ul>
-            </div>
-            <div className="hero-play">
-                <img
-                    onClick={() => setPlayStatus(!playStatus)} // Utilisation de setPlayStatus
-                    src={playStatus ? pause : play} // Changement de l'ordre des images pour plus de logique
-                    alt=""
-                    style={{ width: '60px', height: '60px' }} // Style simplifié
-                />
-                <p>see the video</p>
-            </div>
+const Hero = () => {
+  const [events, setEvents] = useState([]);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchEvents = async () => {
+      try {
+        const res = await axios.get("/api/events");
+        const sorted = res.data
+          .sort((a, b) => new Date(b.date) - new Date(a.date))
+          .slice(0, 3);
+        setEvents(sorted);
+      } catch (error) {
+        console.error("Erreur lors de la récupération des événements :", error);
+      }
+    };
+    fetchEvents();
+  }, []);
+
+  if (events.length === 0) {
+    return <p role="status">Chargement...</p>;
+  }
+
+  const currentEvent = events[currentIndex];
+  const imageUrl = `/api/events/getImage/${currentEvent.id}`;
+
+  return (
+    <section
+      className="hero-section"
+      style={{ backgroundImage: `url(${imageUrl})` }}
+      aria-label="Présentation des événements récents"
+    >
+      <div className="hero-overlay" />
+
+      <article className="hero-content">
+        <header>
+          <h1>{currentEvent.title}</h1>
+        </header>
+
+        <nav className="hero-buttons" aria-label="Navigation rapide">
+          <button onClick={() => navigate("/tutoriel")}>Voir le tutoriel</button>
+          <button onClick={() => navigate("/explore")}>Explorer</button>
+        </nav>
+
+        {/* ✅ Flèches placées en dessous des boutons */}
+        <div className="hero-arrows">
+          <button
+            className="hero-arrow left"
+            onClick={() =>
+              setCurrentIndex(currentIndex === 0 ? events.length - 1 : currentIndex - 1)
+            }
+            aria-label="Événement précédent"
+          >
+            &#8592;
+          </button>
+
+          <button
+            className="hero-arrow right"
+            onClick={() =>
+              setCurrentIndex(currentIndex === events.length - 1 ? 0 : currentIndex + 1)
+            }
+            aria-label="Événement suivant"
+          >
+            &#8594;
+          </button>
         </div>
-    );
+      </article>
+    </section>
+  );
 };
 
 export default Hero;

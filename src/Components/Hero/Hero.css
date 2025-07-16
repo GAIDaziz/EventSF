@@ -1,79 +1,116 @@
-.hero{
-    margin: 0px 120px;
-    margin-top: 270px;
+.hero-section {
+  background-size: cover;
+  background-position: center;
+  height: 500px;
+  position: relative;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  overflow: hidden;
+  padding: 20px;
+  text-align: center;
 }
 
-.hero-text{
-    color: aliceblue;
-    font-size: 110px;
-    font-weight: 500;
-    line-height: 130px;
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1;
 }
 
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
-.hero-explore{
-    display: flex;
-    align-items: center;
-    gap: 50px;
-    width:fit-content;
-    margin-top: 70px;
-    padding: 5px 8px;
-    padding-left: 30px;
-    border-radius: 60px;
-    background-color: aliceblue;
-    cursor: pointer;
+.hero-buttons {
+  margin-top: 20px;
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  justify-content: center;
 }
-.hero-explore p{
-    color: black;
-    font-size: 20px;
-    font-weight: 500;
+
+.hero-buttons button {
+  padding: 10px 20px;
+  background-color: #ffffffaa;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  color: #333;
+  transition: background-color 0.3s;
 }
-.hero-dot-play{
-    margin-top: 120px;
-    display: flex;
+
+.hero-buttons button:hover {
+  background-color: #fff;
+}
+
+/* ✅ Nouveau conteneur de flèches */
+.hero-arrows {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 300px;
+}
+
+.hero-arrow {
+  background-color: rgba(0, 0, 0, 0.4);
+  color: white;
+  font-size: 1.5rem;
+  padding: 10px 14px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.hero-arrow:hover {
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+/* ----------------- Responsive ----------------- */
+
+@media screen and (max-width: 768px) {
+  .hero-section {
+    height: 400px;
+  }
+
+  .hero-arrow {
+    font-size: 1.3rem;
+    padding: 8px 12px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .hero-section {
+    height: 360px;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .hero-buttons button {
+    width: 100%;
+  }
+
+  .hero-arrows {
+    flex-direction: row;
     justify-content: space-between;
-}
-.hero-dots{
-    display: flex;
-    align-items: center;
-    gap: 23px;
-    list-style: none;
-}
-.hero-dot{
-    width: 15px;
-    height: 15px;
-    background-color: aliceblue;
-    border-radius: 7.5px;
-    cursor: pointer;
-}
-.hero-dot.orange{
-    background: rgb(238, 0, 255);
+    max-width: 250px;
+  }
 
-}
-.hero-play{
-    display: flex;
-    align-items: center;
-    gap: 30px;
-}
-.hero-play p{
-    color: aliceblue;
-    font-size: 23px;
-}
-
-@media (max-width : 425px) {
-    .hero-text{
-        color: aliceblue;
-        font-size: 20px;
-        font-weight: 500;
-        line-height: 130px;
-    }
-}
-
-@media (max-width : 768px) {
-    .hero-text{
-        color: aliceblue;
-        font-size: 32px;
-        font-weight: 500;
-        line-height: 130px;
-    }
+  .hero-arrow {
+    font-size: 1.2rem;
+    padding: 6px 10px;
+  }
 }

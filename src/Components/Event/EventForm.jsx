@@ -19,17 +19,14 @@ const EventForm = ({ onClose }) => {
     setEventData({ ...eventData, image: e.target.files[0] });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e) => {  //
     e.preventDefault();
-
-    // 🔥 Récupérer le token d'authentification
-    const token = localStorage.getItem("token");
-
+    const token = localStorage.getItem("token");     // 🔥 Récupérer le token d'authentification
     if (!token) {
       alert("Vous devez être connecté pour créer un événement !");
       return;
     }
-console.log(eventData+";"+token);
+console.log(eventData.date+";"+eventData.description);
     const formData = new FormData();
     for (const key in eventData) {
       formData.append(key, eventData[key]);

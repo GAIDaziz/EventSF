@@ -1,0 +1,63 @@
+.event-card {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+  border-radius: 20px;
+  padding: 1rem;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+  transition: transform 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  border: 2px solid #8F00FF22;
+}
+
+.event-card:hover {
+  transform: translateY(-6px);
+}
+
+/* Image */
+.event-card-image {
+  width: 100%;
+  height: 180px;
+  border-radius: 12px;
+  object-fit: cover;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+}
+
+/* Contenu */
+.event-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.event-card-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #8F00FF;
+  margin: 0;
+}
+
+.event-card-date {
+  font-size: 0.95rem;
+  color: #333;
+  font-weight: 500;
+}
+
+/* Bouton */
+.event-card-button {
+  margin-top: 0.5rem;
+  align-self: flex-start;
+  background: linear-gradient(90deg, #8F00FF, #00ff08);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 0.5rem 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.event-card-button:hover {
+  background: linear-gradient(90deg, #FF3131, #8F00FF);
+}
